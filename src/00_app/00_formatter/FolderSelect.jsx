@@ -1,16 +1,42 @@
 import React, { useState, useRef } from 'react';
 import styled from "styled-components";
 
-const FolderSelect = ({ onFolderDataChange }) => {
-    const [folderData, setFolderData] = useState([]);
-    const fileInput = useRef(null);
+const FolderSelect = ({ onFolderDataChange, onPdfDataChange }) => {
+  const [folderData, setFolderData] = useState([]);
+  const fileInput = useRef(null);
 
-    const handleFolderSelect = (event) => {
-        const files = event.target.files;
-        if (files.length === 0) {
-          return;
-        }
+  const handleFolderSelect = (event) => {
+    const files = event.target.files;
+    if (files.length === 0) {
+      return;
+    }
+
+    const pdfFiles = [];
+    const textFiles = [];
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      if (file.type === 'application/pdf') {
+        pdfFiles.push(file);
+      } else {
+        textFiles.push(file);
+      }
+    }
+
+    if (pdfFiles.length > 0) {
+      onPdfDataChange(pdfFiles);
+      onFolderDataChange([]); // この行を追加
+      setFolderData([]);
+      
+    } else {
+      onPdfDataChange([]);
+    }
+
+    if (textFiles.length === 0) {
+      return;
+    }
         // フォルダデータを初期化する
+        
         setFolderData([]);
         onFolderDataChange([]);
 
@@ -116,4 +142,3 @@ const FileContainer = styled.div`
   padding: 4px 16px;
   border-radius: 10px;
 `;
-

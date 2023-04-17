@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect  } from 'react';
 import styled from "styled-components";
 import ItemSelect from './ItemSelect';
 import SummaryInput from './SummaryInput';
 import CopyButton from './CopyButton';
 import FolderSelect from './FolderSelect';
+import Footer from './Footer';
+import PdfTextExtractor from './PdfTextExtractor';
 
 const ChatGPTTempCreate = () => {
   const [folderData, setFolderData] = useState([]);
@@ -11,6 +13,11 @@ const ChatGPTTempCreate = () => {
   const [summaryText, setSummaryText] = useState("");
   const [inputPrompt, setInputPrompt] = useState("");
   const [copyStatus, setCopyStatus] = useState("");
+  const [selectedPdfs, setSelectedPdfs] = useState([]);
+
+  useEffect(() => {
+    setCopyStatus('');
+  }, [folderData, selectedPdfs]);
 
   const handleItemSelect = (e) => {
     setSelectedItem(e.target.value);
@@ -25,16 +32,31 @@ const ChatGPTTempCreate = () => {
       </Title>
       <FormContainer>
         <FormItemContainer>
-            <ItemSelect value={selectedItem} onChange={handleItemSelect} />
-            <SummaryInput value={summaryText} setInputPrompt={setInputPrompt}
-                onChange={(e) => setSummaryText(e.target.value)}
-                selectedItem={selectedItem}
-            />
-        <CopyButton inputPrompt={inputPrompt} summaryText={summaryText} folderData={folderData} setCopyStatus={setCopyStatus} />
-        <CopyStatus>{copyStatus}</CopyStatus>
-        <FolderSelect onFolderDataChange={setFolderData} />
+          <ItemSelect value={selectedItem} onChange={handleItemSelect} />
+          <SummaryInput
+            value={summaryText}
+            setInputPrompt={setInputPrompt}
+            onChange={(e) => setSummaryText(e.target.value)}
+            selectedItem={selectedItem}
+          />
+          <CopyButton
+            inputPrompt={inputPrompt}
+            summaryText={summaryText}
+            folderData={folderData}
+            selectedPdfs={selectedPdfs}
+            setCopyStatus={setCopyStatus}
+          />
+          <CopyStatus>{copyStatus}</CopyStatus>
+          <FolderSelect onFolderDataChange={setFolderData} onPdfDataChange={setSelectedPdfs} />
+          {selectedPdfs.map((pdfFile, index) => (
+            <div key={index}>
+              <h4>{pdfFile.name}</h4>
+              <PdfTextExtractor file={pdfFile} />
+            </div>
+          ))}
         </FormItemContainer>
       </FormContainer>
+      <Footer />
     </AppContainer>
   );
 };
