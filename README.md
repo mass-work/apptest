@@ -1,70 +1,50 @@
-# Getting Started with Create React App
+# Formatter
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+promptフォーマットを作成するアプリです。
 
-## Available Scripts
+## 目次
 
-In the project directory, you can run:
+- [機能](#機能)
+- [要件](#要件)
+- [インストール](#インストール)
+- [使い方](#使い方)
+- [ライセンス](#ライセンス)
 
-### `yarn start`
+## 機能
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- テンプレートから簡単にpromptフォーマットを作成できます。
+- テキスト入力やファイル添付をサポートしています。
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 要件
 
-### `yarn test`
+- Webブラウザ（最新版のGoogle Chrome、Firefox、Safari、Microsoft Edgeが推奨されます）
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## インストール
 
-### `yarn build`
+このアプリはWebベースのアプリケーションであるため、インストールは必要ありません。アプリケーションのURLにアクセスしてください。
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 使い方
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+ 1. 項目からテンプレートを選択します。
+ 2. 概要欄に必要事項を記載します。
+ 3. 添付したいファイルがあれば「ファイル選択」ボタンを押下します。
+ 4. エクスプローラが立ち上がるのでファイルを追加します。
+ 5. copyボタンを押すとクリップボードに記載内容と追加したファイルの内容がコピーされます。
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## ライセンス
 
-### `yarn eject`
+このWebアプリはMIT Licenseのもとでライセンスされています。詳細については、[LICENSE](LICENSE)ファイルを参照してください。
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 使用している外部ライブラリ
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+このWebアプリは以下の外部ライブラリを使用しています：
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### [styled-components](https://github.com/styled-components/styled-components)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- ライセンス：MIT License
+- ライセンスの全文：[styled-components_LICENSE](https://github.com/styled-components/styled-components/blob/main/LICENSE)
 
-## Learn More
+### [pdf.js](https://github.com/mozilla/pdf.js)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- ライセンス：Apache License 2.0
+- ライセンスの全文：[pdf.js_LICENSE](https://github.com/mozilla/pdf.js/blob/master/LICENSE)
