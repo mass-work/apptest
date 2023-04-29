@@ -5,7 +5,7 @@ import SummaryInput from './SummaryInput';
 import CopyButton from './CopyButton';
 import FolderSelect from './FolderSelect';
 import Footer from './Footer';
-import PdfTextExtractor from './PdfTextExtractor';
+
 
 const ChatGPTTempCreate = () => {
   const [folderData, setFolderData] = useState([]);
@@ -47,13 +47,7 @@ const ChatGPTTempCreate = () => {
             setCopyStatus={setCopyStatus}
           />
           <CopyStatus>{copyStatus}</CopyStatus>
-          <FolderSelect onFolderDataChange={setFolderData} onPdfDataChange={setSelectedPdfs} />
-          {selectedPdfs.map((pdfFile, index) => (
-            <div key={index}>
-              <h4>{pdfFile.name}</h4>
-              <PdfTextExtractor file={pdfFile} />
-            </div>
-          ))}
+          <FolderSelect setFolderData={setFolderData} setSelectedPdfs={setSelectedPdfs} />
         </FormItemContainer>
       </FormContainer>
       <Footer />

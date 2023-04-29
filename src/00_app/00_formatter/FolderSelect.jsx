@@ -1,8 +1,11 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
+import PdfTextExtractor from "./PdfTextExtractor";
+import TextExtractor from "./TextExtractor";
 
-const FolderSelect = ({ onFolderDataChange, onPdfDataChange }) => {
+const FolderSelect = (props) => {
   const [folderData, setFolderData] = useState([]);
+  const [selectedPdfs, setSelectedPdfs] = useState([]);
   const fileInput = useRef(null);
 
   const handleFolderSelect = (event) => {
@@ -16,7 +19,7 @@ const FolderSelect = ({ onFolderDataChange, onPdfDataChange }) => {
 
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
-      if (file.type === 'application/pdf') {
+      if (file.type === "application/pdf") {
         pdfFiles.push(file);
       } else {
         textFiles.push(file);
@@ -24,115 +27,105 @@ const FolderSelect = ({ onFolderDataChange, onPdfDataChange }) => {
     }
 
     if (pdfFiles.length > 0) {
-      onPdfDataChange(pdfFiles);
-      onFolderDataChange([]); // この行を追加
+      setSelectedPdfs(pdfFiles);
       setFolderData([]);
-      
     } else {
-      onPdfDataChange([]);
+      setSelectedPdfs([]);
     }
 
-    if (textFiles.length === 0) {
-      return;
-    }
-        // フォルダデータを初期化する
-        
-        setFolderData([]);
-        onFolderDataChange([]);
-
-        const newFiles = [];
-        for (let i = 0; i < files.length; i++) {
-            const file = files[i];
-            let isDuplicate = false;
-            let duplicateIndex = -1;
-      
-            for (let j = 0; j < folderData.length; j++) {
-              if (folderData[j].name === file.name) {
-                isDuplicate = true;
-                duplicateIndex = j;
-                break;
-              }
-            }
-            if (isDuplicate) {
-              // 古いデータを削除
-              folderData.splice(duplicateIndex, 1);
-            }
-            newFiles.push(file);
-          }
-        if (newFiles.length === 0) {
-          return;
-        }
-      
-        const handleNextFile = (fileIndex) => {
-          if (fileIndex < newFiles.length) {
-            const file = newFiles[fileIndex];
-            const reader = new FileReader();
-            reader.onload = (e) => {
-              updateFolderData((prevData) => [
-                ...prevData,
-                { name: file.name, content: e.target.result.split('\n') },
-              ]);
-              handleNextFile(fileIndex + 1);
-            };
-            reader.readAsText(file);
-          }
-        };
-      
-        handleNextFile(0);
-      };
+    readFiles(textFiles, setFolderData);
+  };
 
   const resetFileInput = () => {
     if (fileInput.current) {
       fileInput.current.value = "";
     }
   };
-  const updateFolderData = (newData) => {
-    setFolderData(newData);
-    onFolderDataChange(newData);
-  };
+
+  props.setFolderData(folderData);
+  props.setSelectedPdfs(selectedPdfs);
+
   return (
     <FolderContainer>
-      <InputContainer type="file" ref={fileInput} onClick={resetFileInput} onChange={handleFolderSelect} multiple />
-      {folderData.map((file, fileIndex) => (
+      <InputContainer
+        type="file"
+        ref={fileInput}
+        onClick={resetFileInput}
+        onChange={handleFolderSelect}
+        multiple
+      />
+      <FileList files={[...folderData, ...selectedPdfs]} />
+    </FolderContainer>
+  );
+};
+
+const readFiles = (files, setData) => {
+  if (files.length === 0) return;
+
+  setData([]);
+  const newFiles = files.slice();
+
+  const readFile = (fileIndex) => {
+    if (fileIndex < newFiles.length) {
+      const file = newFiles[fileIndex];
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setData((prevData) => [
+          ...prevData,
+          { name: file.name, content: e.target.result.split("\n") },
+        ]);
+        readFile(fileIndex + 1);
+      };
+      reader.readAsText(file);
+    }
+  };
+
+  readFile(0);
+};
+
+const FileList = ({ files }) => {
+  return (
+    <>
+      {files.map((file, fileIndex) => (
         <FileContainer key={fileIndex}>
           <h4>{file.name}</h4>
-          {file.content.map((item, index) => (
-            <div key={`${fileIndex}-${index}`}>
-              {item}
-            </div>
-          ))}
+          {file.type === "application/pdf" ? (
+            <PdfTextExtractor file={file} />
+          ) : (
+            <TextExtractor file={file} />
+          )}
         </FileContainer>
       ))}
-    </FolderContainer>
+    </>
   );
 };
 
 export default FolderSelect;
 
 const FolderContainer = styled.div`
-    margin-top: 1rem;
+  margin-top: 1rem;
 `;
 
 const InputContainer = styled.input`
+  border-radius: 5px;
+  color: transparent;
+  &:hover {
+    cursor: pointer;
+  }
+  &::-webkit-file-upload-button {
+    visibility: hidden;
+  }
+  &::before {
+    content: "ファイルを選択";
+    display: inline-block;
+    background: #292929;
+    color: white;
     border-radius: 5px;
-    color: transparent;
-    &:hover {
-      cursor: pointer;
-    }
-    &::-webkit-file-upload-button {
-      visibility: hidden;
-    }
-    &::before {
-      content: "ファイルを選択";
-      display: inline-block;
-      background: #292929;
-      color: white;
-      border-radius: 5px;
-      padding: 8px 16px;
-      font-family: Arial, sans-serif;
-      font-size: 14px;
-      cursor: pointer;
-    }
+    padding: 8px 16px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+  }
 `;
 
 const FileContainer = styled.div`
