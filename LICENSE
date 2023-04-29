@@ -1,13 +1,23 @@
-# License
-
-This web app (hereinafter referred to as "this app") is licensed under the MIT License for the source code, unless otherwise specified.
-
-## MIT License
+[Formatter] Custom License
 
 Copyright (c) 2021 mass
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+1. 商用利用の制限
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+本ソフトウェアおよび関連ドキュメントファイル（以下、「本ソフトウェア」）を商用目的で利用する場合、複製、改変、配布は許可されません。
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+2. 非商用利用
+
+本ソフトウェアは、非商用目的での利用、複製、改変および配布が許可されます。ただし、それぞれの行為に関して、以下の条件を遵守する必要があります。
+
+  a. 著作権表示、本許諾表示および本節を含むすべての著作権表示および免責事項を維持する。
+
+  b. 改変したソフトウェアを配布する場合、改変前のソフトウェアと区別できるように、改変の詳細を明記する。
+
+3. 外部ライブラリ
+
+本ソフトウェアには、Apache License 2.0およびMIT Licenseの下でライセンスされている外部ライブラリが含まれています。これらの外部ライブラリの使用、複製、改変および配布は、それぞれのライセンスに従う必要があります。
+
+4. 免責事項
+
+本ソフトウェアは、明示または黙示を問わず、いかなる保証もなく、「現状有姿」で提供されます。著作権者は、商品性、特定目的への適合性、および非侵害に関する保証を含むがこれに限定されない、いかなる保証も明示的に否認します。いかなる場合においても、著作権者または貢献者は、本ソフトウェアの使用に起因する請求、損害またはその他の責任について、契約上の責任、不法行為による責任、その他の責任を負わないものとします。
