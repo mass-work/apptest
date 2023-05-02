@@ -1,6 +1,6 @@
 # Formatter
 
-promptフォーマットを作成するアプリです。
+prompt フォーマットを作成するアプリです。
 
 ## 目次
 
@@ -12,24 +12,25 @@ promptフォーマットを作成するアプリです。
 
 ## 機能
 
-- テンプレートから簡単にpromptフォーマットを作成できます。
+- テンプレートから簡単に prompt フォーマットを作成できます。
 - テキスト入力やファイル添付をサポートしています。
+-
 
 ## 要件
 
-- Webブラウザ（最新版のGoogle Chrome、Firefox、Safari、Microsoft Edgeが推奨されます）
+- Web ブラウザ（最新版の Google Chrome、Firefox、Safari、Microsoft Edge が推奨されます）
 
 ## インストール
 
-このアプリはWebベースのアプリケーションであるため、インストールは必要ありません。https://mass-work.github.io/apptest/ にアクセスしてください。
+このアプリは Web ベースのアプリケーションであるため、インストールは必要ありません。https://mass-work.github.io/apptest/ にアクセスしてください。
 
 ## 使い方
 
- 1. 項目からテンプレートを選択します。
- 2. 概要欄に必要事項を記載します。
- 3. 添付したいファイルがあれば「ファイル選択」ボタンを押下します。
- 4. エクスプローラが立ち上がるのでファイルを追加します。
- 5. copyボタンを押すとクリップボードに記載内容と追加したファイルの内容がコピーされます。
+1.  項目からテンプレートを選択します。
+2.  概要欄に必要事項を記載します。
+3.  添付したいファイルがあれば「ファイル選択」ボタンを押下します。
+4.  エクスプローラが立ち上がるのでファイルを追加します。
+5.  copy ボタンを押すとクリップボードに記載内容と追加したファイルの内容がコピーされます。
 
 ## ライセンス
 
@@ -37,7 +38,7 @@ promptフォーマットを作成するアプリです。
 
 ## 使用している外部ライブラリ
 
-このWebアプリは以下の外部ライブラリを使用しています：
+この Web アプリは以下の外部ライブラリを使用しています：
 
 ### [styled-components](https://github.com/styled-components/styled-components)
 
@@ -48,3 +49,8 @@ promptフォーマットを作成するアプリです。
 
 - ライセンス：Apache License 2.0
 - ライセンスの全文：[pdf.js_LICENSE](https://github.com/mozilla/pdf.js/blob/master/LICENSE)
+
+### [Tesseract OCR](https://github.com/tesseract-ocr/tesseract)
+
+- ライセンス：Apache License 2.0
+- ライセンスの全文：[Tesseract OCR_LICENSE](https://github.com/tesseract-ocr/tesseract/blob/main/LICENSE)

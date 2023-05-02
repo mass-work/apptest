@@ -1,23 +1,18 @@
-import React, { useState, useEffect  } from 'react';
+import React, { useState } from "react";
 import styled from "styled-components";
-import ItemSelect from './ItemSelect';
-import SummaryInput from './SummaryInput';
-import CopyButton from './CopyButton';
-import FolderSelect from './FolderSelect';
-import Footer from './Footer';
-
+import ItemSelect from "./ItemSelect";
+import SummaryInput from "./SummaryInput";
+import CopyButton from "./CopyButton";
+import FolderSelect from "./FolderSelect";
+import Footer from "./Footer";
+import ImageTextExtractor from "./ImageTextExtractor";
 
 const ChatGPTTempCreate = () => {
   const [folderData, setFolderData] = useState([]);
   const [selectedItem, setSelectedItem] = useState("プログラミング(修正)");
   const [summaryText, setSummaryText] = useState("");
   const [inputPrompt, setInputPrompt] = useState("");
-  const [copyStatus, setCopyStatus] = useState("");
   const [selectedPdfs, setSelectedPdfs] = useState([]);
-
-  useEffect(() => {
-    setCopyStatus('');
-  }, [folderData, selectedPdfs]);
 
   const handleItemSelect = (e) => {
     setSelectedItem(e.target.value);
@@ -27,7 +22,7 @@ const ChatGPTTempCreate = () => {
   return (
     <AppContainer>
       <Title>
-        <img src={process.env.PUBLIC_URL + '/formatterIcon.jpg'} alt="icon" />
+        <img src={process.env.PUBLIC_URL + "/formatterIcon.jpg"} alt="icon" />
         Formatter
       </Title>
       <FormContainer>
@@ -44,12 +39,12 @@ const ChatGPTTempCreate = () => {
             summaryText={summaryText}
             folderData={folderData}
             selectedPdfs={selectedPdfs}
-            setCopyStatus={setCopyStatus}
           />
-          <CopyStatus>{copyStatus}</CopyStatus>
           <FolderSelect setFolderData={setFolderData} setSelectedPdfs={setSelectedPdfs} />
+          <ImageTextExtractor />
         </FormItemContainer>
       </FormContainer>
+
       <Footer />
     </AppContainer>
   );
@@ -62,12 +57,11 @@ const AppContainer = styled.div`
   color: rgb(210, 210, 210);
   padding: 5px;
   height: 100%;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: "Noto Sans JP";
 `;
 
 const Title = styled.h1`
   font-size: 3rem;
-  color: #eee;
   text-align: center;
   margin-bottom: 1rem;
   display: flex;
@@ -90,9 +84,4 @@ const FormItemContainer = styled.div`
   margin-bottom: 2rem;
   width: 100%;
   max-width: 600px;
-`;
-
-const CopyStatus = styled.span`
-  font-size: 1rem;
-  margin-left: 1rem;
 `;

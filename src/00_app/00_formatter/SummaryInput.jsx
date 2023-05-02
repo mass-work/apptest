@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
 const summaryTexts = {
-// -------------------------------------------
-"プログラミング(修正)": `<概要>
+  // -------------------------------------------
+  "プログラミング(修正)": `<概要>
 プログラムの修正をして下さい。
 
 <言語/フレームワーク>
@@ -28,8 +28,8 @@ const summaryTexts = {
 
 <コード>
 `,
-// -------------------------------------------
-"プログラミング(作成)": `<概要>
+  // -------------------------------------------
+  "プログラミング(作成)": `<概要>
 xxを行うプログラムの作成をして下さい。
 
 <言語/フレームワーク>
@@ -50,8 +50,8 @@ xxを行うプログラムの作成をして下さい。
 ###コード
 コードブロックでプログラムを出力
 `,
-// -------------------------------------------
-"WEBデザイン": `<概要>
+  // -------------------------------------------
+  WEBデザイン: `<概要>
 要件に沿ったデザインを作成してください。
 <スタイル>
 ・
@@ -78,8 +78,8 @@ xxを行うプログラムの作成をして下さい。
 
 <コード>
 `,
-// -------------------------------------------
-"数学": `<概要>
+  // -------------------------------------------
+  数学: `<概要>
 数学の問題について解説して下さい。
 
 <問題>
@@ -95,8 +95,8 @@ xxを行うプログラムの作成をして下さい。
 ###参考資料
 参考資料があれば記載
 `,
-// -------------------------------------------
-"質問": `<概要>
+  // -------------------------------------------
+  質問: `<概要>
 ・
 <質問の背景>
 ・
@@ -105,8 +105,8 @@ xxを行うプログラムの作成をして下さい。
 <期待する回答>
 ・
 `,
-// -------------------------------------------
-"メール": `<概要>
+  // -------------------------------------------
+  メール: `<概要>
 メールのテンプレートを作成して下さい。
 <内容>
 ・〇〇について
@@ -121,8 +121,8 @@ xxを行うプログラムの作成をして下さい。
 <出力>
 ・フォーマットの項目、コメントはメールの本文中に記載しない。
 `,
-// -------------------------------------------
-"レポート": `<概要>
+  // -------------------------------------------
+  レポート: `<概要>
 〇〇についてレポートを作成して下さい。
 <出力形式>
 [タイトル]
@@ -143,8 +143,8 @@ xxを行うプログラムの作成をして下さい。
 [参考文献]
  ・
 `,
-// -------------------------------------------
-"リサーチ": `<概要>
+  // -------------------------------------------
+  リサーチ: `<概要>
 調査対象について調べたのち、文章にまとめて下さい。
 <調査対象>
 ・〇〇について
@@ -164,8 +164,8 @@ xxを行うプログラムの作成をして下さい。
 [参考資料]
 ・
 `,
-// -------------------------------------------
-"会話": `<シチュエーション>
+  // -------------------------------------------
+  会話: `<シチュエーション>
 ・
 ・
 <登場人物>
@@ -178,55 +178,51 @@ A:
 B: 
 A: 
 B: 
-`
+`,
 };
 
 const SummaryInput = ({ value, onChange, selectedItem, setInputPrompt }) => {
-    const template = summaryTexts[selectedItem];
-  
-    useEffect(() => {
-      if (!value) {
-        onChange({ target: { value: template } });
-      }
-    }, [selectedItem, value, onChange, template]);
-  
-    const handleInputChange = (e) => {
-      onChange(e);
-      setInputPrompt(e.target.value);
-    };
-  
-    return (
-      <ItemContainer>
-        <div>
-          <label>概要:</label>
-        </div>
-        <TextBox type="text" value={value} onChange={handleInputChange} />
-      </ItemContainer>
-    );
-  };
-  
-  export default SummaryInput;
-  
-  const ItemContainer = styled.div`
-    margin-bottom: 1rem;
-    color: #eee;
-  `;
-  
-  const TextBox = styled.textarea`
-    width: 100%;
-    height: 300px;
-    padding: 1rem;
-    margin: 1rem 0;
-    border: none;
-    background-color: #292929;
-    color: #eee;
-    border-radius: 5px;
-    font-size: 1rem;
+  const template = summaryTexts[selectedItem];
 
-    &:focus {
-        outline: none;
-        box-shadow: 0px 0px 3px 3px #4f4f4f;
+  useEffect(() => {
+    if (!value) {
+      onChange({ target: { value: template } });
     }
-`;
-  
+  }, [selectedItem, value, onChange, template]);
 
+  const handleInputChange = (e) => {
+    onChange(e);
+    setInputPrompt(e.target.value);
+  };
+
+  return (
+    <ItemContainer>
+      <div>
+        <label>プロンプト:</label>
+      </div>
+      <TextBox type="text" value={value} onChange={handleInputChange} />
+    </ItemContainer>
+  );
+};
+
+export default SummaryInput;
+
+const ItemContainer = styled.div`
+  margin-bottom: 1rem;
+`;
+
+const TextBox = styled.textarea`
+  width: 100%;
+  height: 400px;
+  padding: 1rem;
+  border: none;
+  background-color: rgb(40, 40, 40);
+  color: rgb(210, 210, 210);
+  border-radius: 5px;
+  font-size: 1rem;
+
+  &:focus {
+    outline: none;
+    box-shadow: 0px 0px 3px 3px #4f4f4f;
+  }
+`;

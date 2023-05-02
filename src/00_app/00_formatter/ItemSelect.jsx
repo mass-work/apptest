@@ -1,17 +1,29 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
 
-const item_list = ["プログラミング(修正)", "プログラミング(作成)", "WEBデザイン", "リサーチ", "数学", "質問", "メール", "レポート", "会話"];
+const item_list = [
+  "プログラミング(修正)",
+  "プログラミング(作成)",
+  "WEBデザイン",
+  "リサーチ",
+  "数学",
+  "質問",
+  "メール",
+  "レポート",
+  "会話",
+];
 
 const ItemSelect = ({ value, onChange }) => {
   return (
     <ItemContainer>
-        <div>
-            <label>項目:</label>
-        </div>
+      <div>
+        <label>テンプレート:</label>
+      </div>
       <SelectContainer value={value} onChange={onChange}>
         {item_list.map((item) => (
-          <option key={item} value={item}>{item}</option>
+          <option key={item} value={item}>
+            {item}
+          </option>
         ))}
       </SelectContainer>
     </ItemContainer>
@@ -20,19 +32,17 @@ const ItemSelect = ({ value, onChange }) => {
 export default ItemSelect;
 const ItemContainer = styled.div`
   margin-bottom: 1rem;
-  color: #eee;
 `;
 
 const SelectContainer = styled.select`
-    padding: 0.4rem;
-    border: none;
-    background-color: #292929;
-    color: #eee;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
-    &:hover {
-    background-color: #4f4f4f;
+  font-size: 1rem;
+  padding: 0.4rem;
+  border: none;
+  background-color: rgb(40, 40, 40);
+  color: rgb(210, 210, 210);
+  border-radius: 5px;
+  cursor: pointer;
+  &:hover {
+    background-color: rgb(60, 60, 60);
   }
 `;
-

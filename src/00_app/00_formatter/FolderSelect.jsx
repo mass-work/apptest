@@ -17,8 +17,10 @@ const FolderSelect = (props) => {
     const pdfFiles = [];
     const textFiles = [];
 
+    let totalFileSize = 0;
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
+      totalFileSize += file.size;
       if (file.type === "application/pdf") {
         pdfFiles.push(file);
       } else {
@@ -26,14 +28,19 @@ const FolderSelect = (props) => {
       }
     }
 
-    if (pdfFiles.length > 0) {
-      setSelectedPdfs(pdfFiles);
-      setFolderData([]);
+    if (totalFileSize > 5 * 1024 * 1024) {
+      // 5MB以下の合計ファイルサイズに制限
+      alert("合計ファイルサイズが5MBを超えています");
     } else {
-      setSelectedPdfs([]);
-    }
+      if (pdfFiles.length > 0) {
+        setSelectedPdfs(pdfFiles);
+        setFolderData([]);
+      } else {
+        setSelectedPdfs([]);
+      }
 
-    readFiles(textFiles, setFolderData);
+      readFiles(textFiles, setFolderData);
+    }
   };
 
   const resetFileInput = () => {
@@ -47,13 +54,7 @@ const FolderSelect = (props) => {
 
   return (
     <FolderContainer>
-      <InputContainer
-        type="file"
-        ref={fileInput}
-        onClick={resetFileInput}
-        onChange={handleFolderSelect}
-        multiple
-      />
+      <InputContainer type="file" ref={fileInput} onClick={resetFileInput} onChange={handleFolderSelect} multiple />
       <FileList files={[...folderData, ...selectedPdfs]} />
     </FolderContainer>
   );
@@ -70,10 +71,7 @@ const readFiles = (files, setData) => {
       const file = newFiles[fileIndex];
       const reader = new FileReader();
       reader.onload = (e) => {
-        setData((prevData) => [
-          ...prevData,
-          { name: file.name, content: e.target.result.split("\n") },
-        ]);
+        setData((prevData) => [...prevData, { name: file.name, content: e.target.result.split("\n") }]);
         readFile(fileIndex + 1);
       };
       reader.readAsText(file);
@@ -88,12 +86,10 @@ const FileList = ({ files }) => {
     <>
       {files.map((file, fileIndex) => (
         <FileContainer key={fileIndex}>
-          <h4>{file.name}</h4>
-          {file.type === "application/pdf" ? (
-            <PdfTextExtractor file={file} />
-          ) : (
-            <TextExtractor file={file} />
-          )}
+          <FileTitle>{file.name}</FileTitle>
+          <FileContents>
+            {file.type === "application/pdf" ? <PdfTextExtractor file={file} /> : <TextExtractor file={file} />}
+          </FileContents>
         </FileContainer>
       ))}
     </>
@@ -102,9 +98,7 @@ const FileList = ({ files }) => {
 
 export default FolderSelect;
 
-const FolderContainer = styled.div`
-  margin-top: 1rem;
-`;
+const FolderContainer = styled.div``;
 
 const InputContainer = styled.input`
   border-radius: 5px;
@@ -116,22 +110,28 @@ const InputContainer = styled.input`
     visibility: hidden;
   }
   &::before {
-    content: "ファイルを選択";
+    font-weight: 700;
+    content: "テキスト / PDFファイルを読込";
     display: inline-block;
-    background: #292929;
-    color: white;
+    background-color: rgb(40, 40, 40);
+    color: rgb(210, 210, 210);
     border-radius: 5px;
-    padding: 8px 16px;
-    font-family: Arial, sans-serif;
-    font-size: 14px;
+    padding: 0.4rem;
     cursor: pointer;
   }
 `;
-
+const FileTitle = styled.div`
+  color: rgb(230, 230, 230);
+  margin: 2px;
+  font-size: 1.2rem;
+  font-weight: 700;
+`;
+const FileContents = styled.div`
+  padding: 5px 10px;
+`;
 const FileContainer = styled.div`
   margin-top: 1rem;
-  background-color: #292929;
-  color: white;
-  padding: 4px 16px;
-  border-radius: 10px;
+  background-color: rgb(40, 40, 40);
+  padding: 2px 5px;
+  border-radius: 5px;
 `;
